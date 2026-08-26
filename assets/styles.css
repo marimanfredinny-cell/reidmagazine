@@ -257,25 +257,23 @@ p{ margin:0 0 1.15em; }
      da sombra do próprio texto */
   .hero-media::after{ background:none; }
 
+  /* O texto desce até a metade clara da foto, onde estão as nuvens.
+     Ali o marrom da ponte contrasta sozinho, e nada precisa de sombra. */
   .hero-text{
     position:relative; z-index:2;
     justify-content:flex-end;
-    padding:clamp(96px,26vw,170px) clamp(22px,6vw,40px) clamp(42px,10vw,68px);
+    padding:clamp(150px,42vw,260px) clamp(22px,6vw,40px) clamp(18px,4.5vw,32px);
     margin-left:0;
-    /* texto escuro sobre a foto clara: o halo é claro, não escuro */
-    text-shadow:0 1px 10px rgba(255,255,255,.62), 0 0 26px rgba(255,255,255,.5);
+    text-shadow:none;
   }
   .hero-text h1{ color:var(--ponte); }
   .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
-  .hero-tags{ color:var(--ponte-fund); margin-top:1.9rem; }
-  .hero-tags i{ color:#8A6B4A; }
-
-  /* o chapéu fica branco e liso: sem sombra, e sem herdar o halo claro
-     do resto do hero, que sobre letra branca sumiria de vez */
-  .hero-text .eyebrow{
-    color:#FFFFFF;
-    text-shadow:none;
-  }
+  /* o chapéu é a única linha que cai sobre a viga escura da ponte:
+     ali o claro é que contrasta, e segue sem sombra */
+  .hero-text .eyebrow{ color:#FFFFFF; }
+  /* fora do hero no telemóvel: as editorias já estão no menu e no rodapé,
+     e sem elas o botão encosta na quebra da seção, que é onde deve estar */
+  .hero-tags{ display:none; }
 
   .hero-text .btn{
     background:var(--ponte); border-color:var(--ponte); color:var(--paper-2);
