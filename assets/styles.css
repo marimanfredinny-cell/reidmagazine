@@ -92,6 +92,15 @@ p{ margin:0 0 1.15em; }
 
 .center{ text-align:center; }
 
+.flag-br{
+  display:inline-block;
+  height:.82em; width:auto;
+  vertical-align:-.06em;
+  margin-left:.42em;
+  border-radius:2px;
+  box-shadow:0 0 0 1px rgba(35,34,31,.10);
+}
+
 /* ————————————————— logotipo ————————————————— */
 
 .logo{
@@ -242,20 +251,16 @@ p{ margin:0 0 1.15em; }
 
   .hero-media{ min-height:0; height:100%; }
   .hero-media img{ height:100%; }
-  .hero-media::after{
-    background:linear-gradient(180deg,
-      rgba(26,24,20,.34) 0%,
-      rgba(26,24,20,.46) 38%,
-      rgba(26,24,20,.72) 72%,
-      rgba(26,24,20,.88) 100%);
-  }
+  /* sem véu sobre a foto: a imagem entra limpa, a leitura fica por conta
+     da sombra do próprio texto */
+  .hero-media::after{ background:none; }
 
   .hero-text{
     position:relative; z-index:2;
     justify-content:flex-end;
     padding:clamp(96px,26vw,170px) clamp(22px,6vw,40px) clamp(42px,10vw,68px);
     margin-left:0;
-    text-shadow:0 1px 22px rgba(20,18,15,.5);
+    text-shadow:0 1px 3px rgba(18,16,13,.55), 0 2px 26px rgba(18,16,13,.6);
   }
   .hero-text h1{ color:#FFFFFF; }
   .hero-text .eyebrow{ color:#E6CB95; }
