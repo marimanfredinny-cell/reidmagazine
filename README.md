@@ -14,14 +14,39 @@ assets/
   img/            fotos das editorias e da galeria
 ```
 
-## O que ainda precisa dos dados reais
+## Últimas publicações do Instagram
 
-1. **Números de alcance** — em `index.html`, seção `#alcance`, trocar
-   `[X mil]`, `[alcance médio]` e `[média de visualizações]` pelos números
-   do Instagram. O `[X mil]` aparece também na chamada do formulário.
-2. **Insights** — a caixa tracejada em `#alcance` (`.insights-slot`) está
-   reservada pro print ou gráfico. É só substituir o bloco por
-   `<img src="assets/img/insights.jpg" alt="Insights do Instagram">`.
+O carrossel do rodapé lê `assets/instagram.json`. O Instagram não serve o
+feed de um perfil sem autenticação, então as publicações são listadas ali
+à mão — trocar o ficheiro troca o que aparece no site.
+
+```json
+{
+  "publicacoes": [
+    {
+      "imagem": "assets/img/nome-do-ficheiro.jpg",
+      "link": "https://www.instagram.com/p/CODIGO_DO_POST/",
+      "legenda": "A frase que aparece por cima da foto"
+    }
+  ]
+}
+```
+
+A ordem da lista é a ordem no site: a publicação mais recente primeiro.
+A imagem precisa estar em `assets/img/`; o link é o endereço do post, que
+se copia no próprio Instagram em **Copiar ligação**. Se o ficheiro faltar
+ou vier vazio, o carrossel simplesmente não aparece e o rodapé segue
+inteiro.
+
+As três entradas que estão lá agora são provisórias, para o carrossel ter
+o que mostrar. **Trocar antes de pôr o site no ar.**
+
+## Números de alcance
+
+Os números da seção `#alcance` vêm dos insights do Instagram, janela de 27
+de julho a 26 de agosto de 2026. Ao atualizar, mexer também na chamada do
+formulário e no segundo parágrafo da seção "O que é a REID" — os mesmos
+números aparecem nos três lugares.
 
 ## Formulário
 

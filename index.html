@@ -346,7 +346,26 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <img class="footer-sketch" src="assets/logo-mark.svg" alt="" aria-hidden="true">
+    <!-- Últimas publicações. O conteúdo vem de assets/instagram.json;
+         o carrossel some sozinho se o ficheiro não carregar. -->
+    <section class="insta" id="insta" aria-labelledby="insta-titulo" hidden>
+      <div class="insta-head">
+        <h2 class="eyebrow" id="insta-titulo">Últimas da REID</h2>
+        <a class="insta-perfil" href="https://www.instagram.com/reid.magazine/" target="_blank" rel="noopener">@reid.magazine</a>
+      </div>
+
+      <div class="insta-palco">
+        <button class="insta-seta insta-seta-esq" type="button" aria-label="Publicação anterior" aria-controls="insta-trilho">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+
+        <ul class="insta-trilho" id="insta-trilho"></ul>
+
+        <button class="insta-seta insta-seta-dir" type="button" aria-label="Próxima publicação" aria-controls="insta-trilho">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4l8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </section>
 
     <a class="logo logo-footer" href="#top" aria-label="REID Magazine">
       <span class="logo-word">REID</span>

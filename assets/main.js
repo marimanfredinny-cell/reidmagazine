@@ -121,6 +121,101 @@
     while (copia.firstChild) track.appendChild(copia.firstChild);
   }
 
+  /* ——— últimas publicações do Instagram ———
+     O Instagram não serve o feed de um perfil sem autenticação, então as
+     publicações vêm de assets/instagram.json. Trocar aquele ficheiro (à mão
+     ou por uma rotina que fale com a API do Meta) troca o que aparece aqui. */
+  (function () {
+    var secao = document.getElementById('insta');
+    var trilho = document.getElementById('insta-trilho');
+    if (!secao || !trilho) return;
+
+    fetch('assets/instagram.json')
+      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+      .then(function (dados) {
+        var posts = (dados && dados.publicacoes) || [];
+        if (!posts.length) return;
+
+        posts.forEach(function (post) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.className = 'insta-post';
+          a.href = post.link || dados.perfil || '#';
+          a.target = '_blank';
+          a.rel = 'noopener';
+
+          var img = document.createElement('img');
+          img.src = post.imagem;
+          img.alt = post.legenda || 'Publicação da REID Magazine no Instagram';
+          img.loading = 'lazy';
+
+          var legenda = document.createElement('span');
+          legenda.className = 'insta-legenda';
+          legenda.textContent = post.legenda || '';
+
+          a.appendChild(img);
+          if (post.legenda) a.appendChild(legenda);
+          li.appendChild(a);
+          trilho.appendChild(li);
+        });
+
+        secao.hidden = false;
+        montarCarrossel(secao, trilho);
+      })
+      .catch(function () { /* sem ficheiro, o rodapé fica sem o carrossel */ });
+  })();
+
+  function montarCarrossel(secao, trilho) {
+    var palco = secao.querySelector('.insta-palco');
+    var esq = secao.querySelector('.insta-seta-esq');
+    var dir = secao.querySelector('.insta-seta-dir');
+    if (!palco || !esq || !dir) return;
+
+    var passo = function () {
+      var item = trilho.querySelector('li');
+      if (!item) return trilho.clientWidth;
+      var gap = parseFloat(getComputedStyle(trilho).gap) || 0;
+      return item.getBoundingClientRect().width + gap;
+    };
+
+    var sobra = function () { return trilho.scrollWidth - trilho.clientWidth; };
+
+    var arrumarSetas = function () {
+      var temSobra = sobra() > 4;
+      palco.classList.toggle('tem-setas', temSobra);
+      esq.disabled = trilho.scrollLeft <= 2;
+      dir.disabled = trilho.scrollLeft >= sobra() - 2;
+    };
+
+    esq.addEventListener('click', function () { trilho.scrollLeft -= passo(); });
+    dir.addEventListener('click', function () { trilho.scrollLeft += passo(); });
+    trilho.addEventListener('scroll', arrumarSetas, { passive: true });
+    window.addEventListener('resize', arrumarSetas);
+    arrumarSetas();
+
+    /* passa sozinho, e para assim que alguém toca ou passa o rato */
+    if (suave) return;
+
+    var parado = false;
+    var pausar = function () { parado = true; };
+    var soltar = function () { parado = false; };
+    ['pointerenter', 'pointerdown', 'focusin'].forEach(function (evt) {
+      palco.addEventListener(evt, pausar);
+    });
+    ['pointerleave', 'focusout'].forEach(function (evt) {
+      palco.addEventListener(evt, soltar);
+    });
+
+    setInterval(function () {
+      if (parado || document.hidden || sobra() <= 4) return;
+      var caixa = secao.getBoundingClientRect();
+      if (caixa.bottom < 0 || caixa.top > window.innerHeight) return;
+
+      if (trilho.scrollLeft >= sobra() - 2) trilho.scrollLeft = 0;
+      else trilho.scrollLeft += passo();
+    }, 5000);
+  }
+
   /* ——— botão do WhatsApp entra depois do hero ——— */
   var zap = document.querySelector('.whatsapp');
   if (zap) {
