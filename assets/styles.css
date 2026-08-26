@@ -14,6 +14,8 @@
   --gold-soft:  #C9AC76;
   --line:       #D9D2C4;
   --dark:       #201F1C;
+  --ponte:      #543B2F;   /* marrom da ponte, amostrado da foto do hero */
+  --ponte-fund: #4A3529;
 
   --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
   --sans:  "Jost", "Helvetica Neue", Arial, sans-serif;
@@ -91,6 +93,15 @@ p{ margin:0 0 1.15em; }
 .lead.center{ margin-inline:auto; }
 
 .center{ text-align:center; }
+
+.flag-br{
+  display:inline-block;
+  height:.82em; width:auto;
+  vertical-align:-.06em;
+  margin-left:.42em;
+  border-radius:2px;
+  box-shadow:0 0 0 1px rgba(35,34,31,.10);
+}
 
 /* ————————————————— logotipo ————————————————— */
 
@@ -216,20 +227,65 @@ p{ margin:0 0 1.15em; }
 }
 
 .hero-media{ position:relative; overflow:hidden; min-height:clamp(360px, 62vw, 760px); }
-.hero-media img{ width:100%; height:100%; object-fit:cover; object-position:center; }
+.hero-media img{
+  width:100%; height:100%; object-fit:cover; object-position:center;
+  animation:kenburns 26s ease-in-out infinite alternate;
+}
+@keyframes kenburns{
+  from{ transform:scale(1) translateY(0); }
+  to{ transform:scale(1.07) translateY(-1.2%); }
+}
+@media (prefers-reduced-motion: reduce){ .hero-media img{ animation:none; } }
 .hero-media::after{
   content:""; position:absolute; inset:0;
   background:linear-gradient(90deg, var(--paper) 0%, rgba(246,243,236,.35) 22%, rgba(246,243,236,0) 55%);
 }
 
 @media (max-width: 900px){
-  .hero{ grid-template-columns:1fr; }
-  .hero-text{ order:2; padding-top:clamp(34px,7vw,56px); text-align:left; }
-  .hero-media{ order:1; min-height:min(74vh, 560px); }
-  .hero-media::after{
-    background:linear-gradient(180deg, rgba(246,243,236,.30) 0%, rgba(246,243,236,0) 40%, rgba(246,243,236,.92) 100%);
+  /* o texto assenta sobre a foto do rio: as duas camadas ocupam a mesma célula */
+  .hero{
+    grid-template-columns:1fr;
+    grid-template-rows:1fr;
+    min-height:calc(100svh - 66px);
   }
-  .hero-sketch{ width:min(360px, 88%); margin-top:1.8rem; }
+  .hero-media,
+  .hero-text{ grid-column:1; grid-row:1; }
+
+  .hero-media{ min-height:0; height:100%; }
+  .hero-media img{ height:100%; }
+  /* sem véu sobre a foto: a imagem entra limpa, a leitura fica por conta
+     da sombra do próprio texto */
+  .hero-media::after{ background:none; }
+
+  .hero-text{
+    position:relative; z-index:2;
+    justify-content:flex-end;
+    padding:clamp(96px,26vw,170px) clamp(22px,6vw,40px) clamp(42px,10vw,68px);
+    margin-left:0;
+    /* texto escuro sobre a foto clara: o halo é claro, não escuro */
+    text-shadow:0 1px 10px rgba(255,255,255,.62), 0 0 26px rgba(255,255,255,.5);
+  }
+  .hero-text h1{ color:var(--ponte); }
+  .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
+  .hero-tags{ color:var(--ponte-fund); margin-top:1.9rem; }
+  .hero-tags i{ color:#8A6B4A; }
+
+  /* o chapéu fica branco e liso: sem sombra, e sem herdar o halo claro
+     do resto do hero, que sobre letra branca sumiria de vez */
+  .hero-text .eyebrow{
+    color:#FFFFFF;
+    text-shadow:none;
+  }
+
+  .hero-text .btn{
+    background:var(--ponte); border-color:var(--ponte); color:var(--paper-2);
+    box-shadow:0 12px 30px -10px rgba(45,28,20,.55);
+    text-shadow:none;
+  }
+  .hero-text .btn:hover{ background:transparent; color:var(--ponte); border-color:var(--ponte); }
+
+  /* o desenho a lápis não lê sobre a foto — volta no rodapé */
+  .hero-sketch{ display:none; }
 }
 
 /* ————————————————— botões ————————————————— */
@@ -280,54 +336,93 @@ p{ margin:0 0 1.15em; }
   grid-template-columns:repeat(5, minmax(0, 1fr));
   gap:clamp(18px, 2.4vw, 34px);
 }
-.card figure{ margin:0 0 20px; overflow:hidden; background:var(--paper-2); }
-.card figure img{
-  width:100%; aspect-ratio:3/4; object-fit:cover;
-  transition:transform .7s cubic-bezier(.2,.7,.3,1);
+.polaroid{
+  background:#FCFBF7;
+  padding:12px 12px 0;
+  box-shadow:0 1px 2px rgba(35,34,31,.10), 0 14px 30px -18px rgba(35,34,31,.45);
+  border:1px solid rgba(35,34,31,.07);
+  transition:transform .5s cubic-bezier(.2,.7,.3,1), box-shadow .5s;
+  will-change:transform;
 }
-.card:hover figure img{ transform:scale(1.045); }
-.card h3{
-  font-size:1.55rem;
-  padding-bottom:.35em;
-  border-bottom:1px solid var(--line);
-  margin-bottom:.6em;
+.editorias .card:nth-child(1) .polaroid{ transform:rotate(-1.6deg); }
+.editorias .card:nth-child(2) .polaroid{ transform:rotate(1.1deg); }
+.editorias .card:nth-child(3) .polaroid{ transform:rotate(-.7deg); }
+.editorias .card:nth-child(4) .polaroid{ transform:rotate(1.5deg); }
+.editorias .card:nth-child(5) .polaroid{ transform:rotate(-1.2deg); }
+
+.card:hover .polaroid,
+.card:focus-within .polaroid{
+  transform:rotate(0deg) translateY(-8px);
+  box-shadow:0 2px 3px rgba(35,34,31,.10), 0 26px 46px -22px rgba(35,34,31,.55);
 }
-.card p{ color:var(--ink-soft); font-size:.95rem; margin:0; }
+
+/* a foto da polaroide troca sozinha */
+.shots{ position:relative; aspect-ratio:1/1; overflow:hidden; background:#E7E1D6; }
+.shots .shot{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  opacity:0;
+  transition:opacity 1.1s ease;
+}
+.shots .shot.is-on{ opacity:1; }
+
+.polaroid h3{
+  font-size:1.5rem;
+  font-style:italic;
+  text-align:center;
+  color:var(--ink);
+  padding:.62em 4px .72em;
+  margin:0;
+}
+
+.card p{ color:var(--ink-soft); font-size:.95rem; margin:1.35em 0 0; }
 
 @media (max-width: 1040px){
-  .editorias{ grid-template-columns:repeat(3, minmax(0,1fr)); }
-  .editorias .card:nth-child(4){ grid-column:span 2; }
-  .editorias .card:nth-child(4) figure img{ aspect-ratio:16/10; }
+  .editorias{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(18px,3vw,30px) clamp(16px,2.6vw,26px); }
 }
 
-@media (max-width: 640px){
-  .editorias{ grid-template-columns:1fr 1fr; gap:20px 18px; }
-  .editorias .card:nth-child(4){ grid-column:auto; }
-  .editorias .card:nth-child(4) figure img{ aspect-ratio:3/4; }
-  .editorias .card:nth-child(5){ grid-column:span 2; }
-  .editorias .card:nth-child(5) figure img{ aspect-ratio:16/10; }
-  .card figure{ margin-bottom:14px; }
-  .card h3{ font-size:1.24rem; }
-  .card p{ font-size:.87rem; }
+@media (max-width: 680px){
+  .editorias{ grid-template-columns:repeat(2, minmax(0,1fr)); gap:30px 18px; }
+  .editorias .card:nth-child(5){
+    grid-column:1 / -1;
+    max-width:calc(50% - 9px);
+    margin-inline:auto;
+  }
+  .polaroid{ padding:9px 9px 0; }
+  .polaroid h3{ font-size:1.18rem; }
+  .card p{ font-size:.86rem; margin-top:1.1em; }
 }
 
 /* ————————————————— galeria ————————————————— */
 
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(7, 1fr);
-  gap:2px;
+  overflow:hidden;
   background:var(--line);
+  padding:2px 0;
+  -webkit-mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+          mask-image:linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
 }
-.gallery img{
-  width:100%; aspect-ratio:1/1; object-fit:cover;
-  filter:saturate(.9);
-  transition:filter .4s, transform .6s;
+.gallery-track{
+  display:flex; gap:2px; width:max-content;
+  animation:marquee 78s linear infinite;
 }
-.gallery img:hover{ filter:saturate(1.05); transform:scale(1.03); }
+.gallery:hover .gallery-track,
+.gallery:focus-within .gallery-track{ animation-play-state:paused; }
 
-@media (max-width: 900px){ .gallery{ grid-template-columns:repeat(4, 1fr); } }
-@media (max-width: 520px){ .gallery{ grid-template-columns:repeat(3, 1fr); } }
+.gallery-track img{
+  width:clamp(132px, 15vw, 210px);
+  aspect-ratio:1/1; object-fit:cover;
+  filter:saturate(.88);
+  transition:filter .4s;
+}
+.gallery-track img:hover{ filter:saturate(1.06); }
+
+@keyframes marquee{ to{ transform:translateX(-50%); } }
+
+@media (prefers-reduced-motion: reduce){
+  .gallery{ -webkit-mask-image:none; mask-image:none; }
+  .gallery-track{ animation:none; flex-wrap:wrap; width:100%; justify-content:center; }
+}
 
 /* ————————————————— alcance ————————————————— */
 
@@ -515,4 +610,51 @@ p{ margin:0 0 1.15em; }
 .reveal.in{ opacity:1; transform:none; transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.3,1); }
 @media (prefers-reduced-motion: reduce){
   .reveal, .reveal.in{ opacity:1; transform:none; transition:none; }
+}
+
+/* ————————————————— WhatsApp flutuante ————————————————— */
+
+.whatsapp{
+  position:fixed;
+  right:clamp(16px, 2.4vw, 30px);
+  bottom:clamp(16px, 2.4vw, 30px);
+  z-index:70;
+  display:inline-flex; align-items:center; gap:0;
+  height:58px; width:58px;
+  padding:0 17px;
+  border-radius:999px;
+  background:#1F8A5B;
+  color:#FFFFFF;
+  text-decoration:none;
+  box-shadow:0 10px 30px -8px rgba(20,50,35,.5), 0 2px 6px rgba(20,50,35,.24);
+  overflow:hidden;
+  transform:translateY(14px) scale(.9);
+  opacity:0;
+  pointer-events:none;
+  transition:width .38s cubic-bezier(.2,.7,.3,1), transform .4s cubic-bezier(.2,.7,.3,1),
+             opacity .4s ease, background .25s;
+}
+.whatsapp.is-ready{ opacity:1; transform:none; pointer-events:auto; }
+
+.whatsapp svg{ width:24px; height:24px; flex:0 0 24px; fill:currentColor; }
+.whatsapp span{
+  font-size:.74rem; letter-spacing:.18em; text-transform:uppercase;
+  white-space:nowrap; opacity:0;
+  margin-left:0;
+  transition:opacity .28s ease, margin-left .38s cubic-bezier(.2,.7,.3,1);
+}
+
+.whatsapp:hover,
+.whatsapp:focus-visible{ background:#17784E; width:172px; }
+.whatsapp:hover span,
+.whatsapp:focus-visible span{ opacity:1; margin-left:12px; }
+
+@media (max-width: 900px){
+  .whatsapp{ height:54px; width:54px; padding:0 15px; }
+  .whatsapp:hover, .whatsapp:focus-visible{ width:54px; }
+  .whatsapp:hover span, .whatsapp:focus-visible span{ opacity:0; margin-left:0; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .whatsapp{ transition:background .25s; transform:none; }
 }

@@ -1,25 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="Ponte 25 de Abril e Torre de Belém">
   <g fill="none" stroke="#2B2A27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-    <!-- main cable -->
-    <path d="M8 96 C 70 92, 110 104, 150 150 C 190 196, 214 208, 246 210 C 286 208, 320 190, 352 150 C 384 110, 420 96, 452 96"/>
-    <!-- second cable (slight offset, sketch feel) -->
-    <path d="M8 101 C 72 97, 112 109, 152 154 C 190 199, 215 212, 246 214 C 288 212, 322 194, 354 154 C 386 114, 422 101, 452 101" opacity=".5"/>
+    <!-- main cable: ancora no tabuleiro, passa no topo das torres, folga acima do tabuleiro -->
+    <path d="M2 204 Q 70 150 163 62 Q 264 290 365 62 Q 400 150 452 204"/>
+    <path d="M2 209 Q 71 155 164 67 Q 264 293 366 67 Q 401 155 452 209" opacity=".45"/>
     <!-- deck -->
     <path d="M2 208 L 452 208"/>
     <path d="M2 214 L 452 214" opacity=".5"/>
     <!-- towers -->
-    <path d="M150 62 L150 236 M176 62 L176 236 M150 62 L176 62 M150 92 L176 92 M150 150 L176 150"/>
-    <path d="M352 62 L352 236 M378 62 L378 236 M352 62 L378 62 M352 92 L378 92 M352 150 L378 150"/>
-    <path d="M150 92 L176 150 M176 92 L150 150"/>
-    <path d="M352 92 L378 150 M378 92 L352 150"/>
+    <path d="M150 56 L150 236 M176 56 L176 236 M150 56 L176 56 M150 88 L176 88 M150 146 L176 146"/>
+    <path d="M352 56 L352 236 M378 56 L378 236 M352 56 L378 56 M352 88 L378 88 M352 146 L378 146"/>
+    <path d="M150 88 L176 146 M176 88 L150 146"/>
+    <path d="M352 88 L378 146 M378 88 L352 146"/>
+    <path d="M150 170 L176 200 M176 170 L150 200" opacity=".7"/>
+    <path d="M352 170 L378 200 M378 170 L352 200" opacity=".7"/>
     <!-- tower footings -->
     <path d="M142 236 L184 236 L184 244 L142 244 Z"/>
     <path d="M344 236 L386 236 L386 244 L344 244 Z"/>
     <!-- hangers -->
-    <g opacity=".7">
-      <path d="M40 95 V208 M64 96 V208 M88 99 V208 M112 110 V208 M136 128 V208"/>
-      <path d="M200 180 V208 M224 200 V208 M270 202 V208 M296 190 V208 M320 170 V208"/>
-      <path d="M404 108 V208 M428 99 V208"/>
+    <g opacity=".65">
+      <path d="M38 176 V208 M76 142 V208 M100 122 V208 M118 104 V208 M136 84 V208"/>
+      <path d="M190 115 V208 M214 148 V208 M238 168 V208 M264 176 V208 M290 168 V208 M314 148 V208 M338 115 V208"/>
+      <path d="M392 119 V208 M410 142 V208 M428 168 V208"/>
     </g>
     <!-- birds -->
     <path d="M300 60 q6 -7 12 0 M312 60 q6 -7 12 0" opacity=".8"/>
