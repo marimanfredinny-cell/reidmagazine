@@ -121,6 +121,159 @@
     while (copia.firstChild) track.appendChild(copia.firstChild);
   }
 
+  /* ——— últimas publicações do Instagram ———
+     O Instagram não serve o feed de um perfil sem autenticação, então as
+     publicações vêm de assets/instagram.json. Trocar aquele ficheiro (à mão
+     ou por uma rotina que fale com a API do Meta) troca o que aparece aqui. */
+  (function () {
+    var secao = document.getElementById('insta');
+    var trilho = document.getElementById('insta-trilho');
+    if (!secao || !trilho) return;
+
+    /* numa página de ficheiro único os dados vêm embutidos; no site normal,
+       do ficheiro ao lado */
+    var embutido = document.getElementById('insta-dados');
+    var fonte = embutido
+      ? Promise.resolve(JSON.parse(embutido.textContent))
+      : fetch('assets/instagram.json').then(function (r) {
+          return r.ok ? r.json() : Promise.reject();
+        });
+
+    fonte
+      .then(function (dados) {
+        var posts = (dados && dados.publicacoes) || [];
+        if (!posts.length) return;
+
+        var utilizador = dados.utilizador || 'reid.magazine';
+
+        posts.forEach(function (post) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.className = 'insta-post';
+          a.href = post.link || dados.perfil || '#';
+          a.target = '_blank';
+          a.rel = 'noopener';
+          a.setAttribute('aria-label',
+            'Abrir no Instagram: ' + (post.legenda || 'publicação da REID Magazine'));
+
+          a.appendChild(cabecalhoDoPost(utilizador));
+
+          var moldura = document.createElement('span');
+          moldura.className = 'insta-arte';
+          var img = document.createElement('img');
+          img.src = post.imagem;
+          img.alt = post.legenda || 'Publicação da REID Magazine no Instagram';
+          img.loading = 'lazy';
+          moldura.appendChild(img);
+          a.appendChild(moldura);
+
+          a.appendChild(rodapeDoPost(utilizador, post.legenda));
+
+          li.appendChild(a);
+          trilho.appendChild(li);
+        });
+
+        secao.hidden = false;
+        montarCarrossel(secao, trilho);
+      })
+      .catch(function () { /* sem ficheiro, o rodapé fica sem o carrossel */ });
+  })();
+
+  function cabecalhoDoPost(utilizador) {
+    var topo = document.createElement('span');
+    topo.className = 'insta-topo';
+
+    var selo = document.createElement('span');
+    selo.className = 'insta-selo';
+    selo.textContent = 'R';
+
+    var nome = document.createElement('span');
+    nome.className = 'insta-nome';
+    nome.textContent = utilizador;
+
+    topo.appendChild(selo);
+    topo.appendChild(nome);
+    return topo;
+  }
+
+  function rodapeDoPost(utilizador, legenda) {
+    var base = document.createElement('span');
+    base.className = 'insta-base';
+
+    var icones = document.createElement('span');
+    icones.className = 'insta-icones';
+    icones.setAttribute('aria-hidden', 'true');
+    icones.innerHTML =
+      '<svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg>' +
+      '<svg viewBox="0 0 24 24"><path d="M21 11.6c0 4-4 7.2-9 7.2a10.6 10.6 0 0 1-2.6-.3L4 20.5l1.5-3.4A6.8 6.8 0 0 1 3 11.6c0-4 4-7.2 9-7.2s9 3.2 9 7.2z"/></svg>' +
+      '<svg viewBox="0 0 24 24"><path d="M21.5 3.2 2.8 10.4l6.6 2.3 2.3 6.6 9.8-16.1z"/><path d="m9.4 12.7 4.4-4.4"/></svg>';
+
+    base.appendChild(icones);
+
+    if (legenda) {
+      var texto = document.createElement('span');
+      texto.className = 'insta-legenda';
+      var quem = document.createElement('b');
+      quem.textContent = utilizador;
+      texto.appendChild(quem);
+      texto.appendChild(document.createTextNode(' ' + legenda));
+      base.appendChild(texto);
+    }
+
+    return base;
+  }
+
+  function montarCarrossel(secao, trilho) {
+    var palco = secao.querySelector('.insta-palco');
+    var esq = secao.querySelector('.insta-seta-esq');
+    var dir = secao.querySelector('.insta-seta-dir');
+    if (!palco || !esq || !dir) return;
+
+    var passo = function () {
+      var item = trilho.querySelector('li');
+      if (!item) return trilho.clientWidth;
+      var gap = parseFloat(getComputedStyle(trilho).gap) || 0;
+      return item.getBoundingClientRect().width + gap;
+    };
+
+    var sobra = function () { return trilho.scrollWidth - trilho.clientWidth; };
+
+    var arrumarSetas = function () {
+      var temSobra = sobra() > 4;
+      palco.classList.toggle('tem-setas', temSobra);
+      esq.disabled = trilho.scrollLeft <= 2;
+      dir.disabled = trilho.scrollLeft >= sobra() - 2;
+    };
+
+    esq.addEventListener('click', function () { trilho.scrollLeft -= passo(); });
+    dir.addEventListener('click', function () { trilho.scrollLeft += passo(); });
+    trilho.addEventListener('scroll', arrumarSetas, { passive: true });
+    window.addEventListener('resize', arrumarSetas);
+    arrumarSetas();
+
+    /* passa sozinho, e para assim que alguém toca ou passa o rato */
+    if (suave) return;
+
+    var parado = false;
+    var pausar = function () { parado = true; };
+    var soltar = function () { parado = false; };
+    ['pointerenter', 'pointerdown', 'focusin'].forEach(function (evt) {
+      palco.addEventListener(evt, pausar);
+    });
+    ['pointerleave', 'focusout'].forEach(function (evt) {
+      palco.addEventListener(evt, soltar);
+    });
+
+    setInterval(function () {
+      if (parado || document.hidden || sobra() <= 4) return;
+      var caixa = secao.getBoundingClientRect();
+      if (caixa.bottom < 0 || caixa.top > window.innerHeight) return;
+
+      if (trilho.scrollLeft >= sobra() - 2) trilho.scrollLeft = 0;
+      else trilho.scrollLeft += passo();
+    }, 5000);
+  }
+
   /* ——— botão do WhatsApp entra depois do hero ——— */
   var zap = document.querySelector('.whatsapp');
   if (zap) {
