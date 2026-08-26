@@ -83,6 +83,33 @@
     }, espera);
   });
 
+  /* ——— as barras das métricas crescem quando a seção entra na tela ———
+     Observa-se o bloco, não cada barra: uma barra nasce com largura zero,
+     e um elemento de área zero nunca cruza o threshold do observer. */
+  var painel = document.querySelector('.breakdown');
+  if (painel) {
+    var barras = painel.querySelectorAll('.bar i');
+    var encher = function () {
+      Array.prototype.forEach.call(barras, function (barra, i) {
+        barra.style.transitionDelay = (0.12 * i).toFixed(2) + 's';
+        barra.classList.add('is-full');
+      });
+    };
+
+    if (suave || !('IntersectionObserver' in window)) {
+      encher();
+    } else {
+      var ioPainel = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          encher();
+          ioPainel.disconnect();
+        });
+      }, { threshold: 0.25 });
+      ioPainel.observe(painel);
+    }
+  }
+
   /* ——— faixa de fotos em movimento contínuo ——— */
   var track = document.getElementById('gallery-track');
   if (track && !suave) {
