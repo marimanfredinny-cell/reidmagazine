@@ -14,6 +14,8 @@
   --gold-soft:  #C9AC76;
   --line:       #D9D2C4;
   --dark:       #201F1C;
+  --ponte:      #543B2F;   /* marrom da ponte, amostrado da foto do hero */
+  --ponte-fund: #4A3529;
 
   --serif: "Cormorant Garamond", "Times New Roman", Georgia, serif;
   --sans:  "Jost", "Helvetica Neue", Arial, sans-serif;
@@ -263,22 +265,24 @@ p{ margin:0 0 1.15em; }
     /* texto escuro sobre a foto clara: o halo é claro, não escuro */
     text-shadow:0 1px 10px rgba(255,255,255,.62), 0 0 26px rgba(255,255,255,.5);
   }
-  .hero-text h1{ color:var(--ink); }
-  .hero-text .lead{ color:#2C2A26; max-width:38ch; }
-  .hero-tags{ color:#39362F; margin-top:1.9rem; }
-  .hero-tags i{ color:#7A6844; }
+  .hero-text h1{ color:var(--ponte); }
+  .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
+  .hero-tags{ color:var(--ponte-fund); margin-top:1.9rem; }
+  .hero-tags i{ color:#8A6B4A; }
 
-  /* o chapéu cai sobre a estrutura escura da ponte: branco, com halo escuro */
+  /* o chapéu fica branco e liso: sem sombra, e sem herdar o halo claro
+     do resto do hero, que sobre letra branca sumiria de vez */
   .hero-text .eyebrow{
     color:#FFFFFF;
-    text-shadow:0 1px 2px rgba(18,16,13,.95), 0 0 10px rgba(18,16,13,.85),
-                0 0 30px rgba(18,16,13,.7);
+    text-shadow:none;
   }
 
   .hero-text .btn{
-    box-shadow:0 12px 30px -10px rgba(20,18,15,.5);
+    background:var(--ponte); border-color:var(--ponte); color:var(--paper-2);
+    box-shadow:0 12px 30px -10px rgba(45,28,20,.55);
     text-shadow:none;
   }
+  .hero-text .btn:hover{ background:transparent; color:var(--ponte); border-color:var(--ponte); }
 
   /* o desenho a lápis não lê sobre a foto — volta no rodapé */
   .hero-sketch{ display:none; }
