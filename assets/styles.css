@@ -265,7 +265,7 @@ p{ margin:0 0 1.15em; }
   .hero-text{
     position:relative; z-index:2;
     justify-content:flex-start;
-    padding:clamp(26px,7vw,48px) clamp(22px,6vw,40px) clamp(18px,4.5vw,32px);
+    padding:clamp(92px,24vw,160px) clamp(22px,6vw,40px) clamp(18px,4.5vw,32px);
     margin-left:0;
     text-shadow:none;
   }
@@ -274,9 +274,7 @@ p{ margin:0 0 1.15em; }
     margin-bottom:auto;   /* empurra o parágrafo e o botão para a base */
   }
   .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
-  /* com o título no alto, o chapéu passa a cair sobre o céu claro:
-     ali é o marrom que contrasta, e segue sem sombra */
-  .hero-text .eyebrow{ color:var(--ponte-fund); }
+  .hero-text .eyebrow{ color:#FFFFFF; }
   /* fora do hero no telemóvel: as editorias já estão no menu e no rodapé,
      e sem elas o botão encosta na quebra da seção, que é onde deve estar */
   .hero-tags{ display:none; }
