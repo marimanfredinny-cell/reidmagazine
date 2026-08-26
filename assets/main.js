@@ -130,8 +130,16 @@
     var trilho = document.getElementById('insta-trilho');
     if (!secao || !trilho) return;
 
-    fetch('assets/instagram.json')
-      .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
+    /* numa página de ficheiro único os dados vêm embutidos; no site normal,
+       do ficheiro ao lado */
+    var embutido = document.getElementById('insta-dados');
+    var fonte = embutido
+      ? Promise.resolve(JSON.parse(embutido.textContent))
+      : fetch('assets/instagram.json').then(function (r) {
+          return r.ok ? r.json() : Promise.reject();
+        });
+
+    fonte
       .then(function (dados) {
         var posts = (dados && dados.publicacoes) || [];
         if (!posts.length) return;
