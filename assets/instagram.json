@@ -3,25 +3,28 @@
     "As publicações que aparecem no carrossel do rodapé.",
     "Cada item precisa de: imagem (caminho no repositório), link (URL do post) e legenda.",
     "A ordem aqui é a ordem que aparece no site: a mais recente primeiro.",
-    "Enquanto o feed não estiver ligado à conta, estas entradas são provisórias."
+    "Os links abaixo são os posts reais. As imagens ainda são provisórias:",
+    "subir a capa de cada post em assets/img/ e trocar o campo imagem."
   ],
   "perfil": "https://www.instagram.com/reid.magazine/",
-  "provisorio": true,
   "publicacoes": [
     {
       "imagem": "assets/img/cultura-2.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "A noite em que o fado encheu a casa"
+      "link": "https://www.instagram.com/p/DcT_naLjfpn/",
+      "legenda": "",
+      "_capa_pendente": true
     },
     {
       "imagem": "assets/img/gastronomia-3.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "A cozinha que não abre mão do tempo"
+      "link": "https://www.instagram.com/p/DcERMGIjUQ8/",
+      "legenda": "",
+      "_capa_pendente": true
     },
     {
       "imagem": "assets/img/travel-5.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "O miradouro que Lisboa guarda pro fim do dia"
+      "link": "https://www.instagram.com/p/Db0XXxdjbJQ/",
+      "legenda": "",
+      "_capa_pendente": true
     }
   ]
 }
