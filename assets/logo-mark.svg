@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 300" role="img" aria-label="Ponte 25 de Abril e Torre de Belém">
+  <g fill="none" stroke="#2B2A27" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- main cable -->
+    <path d="M8 96 C 70 92, 110 104, 150 150 C 190 196, 214 208, 246 210 C 286 208, 320 190, 352 150 C 384 110, 420 96, 452 96"/>
+    <!-- second cable (slight offset, sketch feel) -->
+    <path d="M8 101 C 72 97, 112 109, 152 154 C 190 199, 215 212, 246 214 C 288 212, 322 194, 354 154 C 386 114, 422 101, 452 101" opacity=".5"/>
+    <!-- deck -->
+    <path d="M2 208 L 452 208"/>
+    <path d="M2 214 L 452 214" opacity=".5"/>
+    <!-- towers -->
+    <path d="M150 62 L150 236 M176 62 L176 236 M150 62 L176 62 M150 92 L176 92 M150 150 L176 150"/>
+    <path d="M352 62 L352 236 M378 62 L378 236 M352 62 L378 62 M352 92 L378 92 M352 150 L378 150"/>
+    <path d="M150 92 L176 150 M176 92 L150 150"/>
+    <path d="M352 92 L378 150 M378 92 L352 150"/>
+    <!-- tower footings -->
+    <path d="M142 236 L184 236 L184 244 L142 244 Z"/>
+    <path d="M344 236 L386 236 L386 244 L344 244 Z"/>
+    <!-- hangers -->
+    <g opacity=".7">
+      <path d="M40 95 V208 M64 96 V208 M88 99 V208 M112 110 V208 M136 128 V208"/>
+      <path d="M200 180 V208 M224 200 V208 M270 202 V208 M296 190 V208 M320 170 V208"/>
+      <path d="M404 108 V208 M428 99 V208"/>
+    </g>
+    <!-- birds -->
+    <path d="M300 60 q6 -7 12 0 M312 60 q6 -7 12 0" opacity=".8"/>
+    <path d="M348 34 q5 -6 10 0 M358 34 q5 -6 10 0" opacity=".8"/>
+    <path d="M396 68 q5 -6 10 0 M406 68 q5 -6 10 0" opacity=".8"/>
+
+    <!-- Torre de Belém: base bastion -->
+    <path d="M430 244 L430 210 L556 210 L556 244"/>
+    <path d="M430 210 L430 202 L556 202 L556 210"/>
+    <g opacity=".8"><path d="M438 202 V194 M450 202 V194 M462 202 V194 M474 202 V194 M486 202 V194 M498 202 V194 M510 202 V194 M522 202 V194 M534 202 V194 M546 202 V194"/></g>
+    <path d="M444 236 h14 v-14 h-14 z M474 236 h14 v-14 h-14 z M504 236 h14 v-14 h-14 z"/>
+    <!-- bastion turrets -->
+    <path d="M424 202 v-22 a10 10 0 0 1 20 0 v22 M424 180 h20 M434 180 v-12 M428 168 h12 l-6 -12 z"/>
+    <path d="M542 202 v-22 a10 10 0 0 1 20 0 v22 M542 180 h20 M552 180 v-12 M546 168 h12 l-6 -12 z"/>
+    <!-- main tower body -->
+    <path d="M556 210 L556 76 L636 76 L636 210"/>
+    <path d="M556 96 L636 96 M556 140 L636 140 M556 176 L636 176"/>
+    <g opacity=".85"><path d="M560 76 V66 M572 76 V66 M584 76 V66 M596 76 V66 M608 76 V66 M620 76 V66 M632 76 V66"/></g>
+    <!-- tower windows -->
+    <path d="M572 130 h12 v-22 a6 6 0 0 0 -12 0 z"/>
+    <path d="M594 130 h12 v-22 a6 6 0 0 0 -12 0 z"/>
+    <path d="M616 130 h12 v-22 a6 6 0 0 0 -12 0 z"/>
+    <path d="M572 168 h12 v-16 h-12 z M608 168 h12 v-16 h-12 z"/>
+    <!-- tower corner turrets -->
+    <path d="M550 96 v-30 a8 8 0 0 1 16 0 v30 M550 66 h16 M558 66 v-12 M552 54 h12 l-6 -12 z"/>
+    <path d="M626 96 v-30 a8 8 0 0 1 16 0 v30 M626 66 h16 M634 66 v-12 M628 54 h12 l-6 -12 z"/>
+    <!-- water line -->
+    <path d="M0 244 L640 244"/>
+    <g opacity=".45">
+      <path d="M20 254 h90 M140 254 h70 M250 256 h120 M400 254 h80 M510 256 h100"/>
+      <path d="M60 264 h120 M220 266 h90 M340 264 h70 M450 266 h130"/>
+      <path d="M30 276 h140 M210 274 h180 M430 276 h150"/>
+    </g>
+  </g>
+</svg>
