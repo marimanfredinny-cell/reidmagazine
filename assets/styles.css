@@ -262,13 +262,13 @@ p{ margin:0 0 1.15em; }
     justify-content:flex-end;
     padding:clamp(96px,26vw,170px) clamp(22px,6vw,40px) clamp(42px,10vw,68px);
     margin-left:0;
-    /* texto escuro sobre a foto clara: o halo é claro, não escuro */
-    text-shadow:0 1px 10px rgba(255,255,255,.62), 0 0 26px rgba(255,255,255,.5);
+    /* texto claro sobre a foto: o halo volta a ser escuro, sem tocar na imagem */
+    text-shadow:0 1px 3px rgba(20,17,13,.6), 0 0 24px rgba(20,17,13,.55);
   }
-  .hero-text h1{ color:var(--ponte); }
-  .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
-  .hero-tags{ color:var(--ponte-fund); margin-top:1.9rem; }
-  .hero-tags i{ color:#8A6B4A; }
+  .hero-text h1{ color:#FBF8F2; }
+  .hero-text .lead{ color:#F4EFE6; max-width:38ch; }
+  .hero-tags{ color:#EFE9DE; margin-top:1.9rem; }
+  .hero-tags i{ color:#E3C68A; }
 
   /* o chapéu fica branco e liso: sem sombra, e sem herdar o halo claro
      do resto do hero, que sobre letra branca sumiria de vez */
