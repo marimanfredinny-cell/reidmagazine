@@ -144,6 +144,8 @@
         var posts = (dados && dados.publicacoes) || [];
         if (!posts.length) return;
 
+        var utilizador = dados.utilizador || 'reid.magazine';
+
         posts.forEach(function (post) {
           var li = document.createElement('li');
           var a = document.createElement('a');
@@ -151,18 +153,22 @@
           a.href = post.link || dados.perfil || '#';
           a.target = '_blank';
           a.rel = 'noopener';
+          a.setAttribute('aria-label',
+            'Abrir no Instagram: ' + (post.legenda || 'publicação da REID Magazine'));
 
+          a.appendChild(cabecalhoDoPost(utilizador));
+
+          var moldura = document.createElement('span');
+          moldura.className = 'insta-arte';
           var img = document.createElement('img');
           img.src = post.imagem;
           img.alt = post.legenda || 'Publicação da REID Magazine no Instagram';
           img.loading = 'lazy';
+          moldura.appendChild(img);
+          a.appendChild(moldura);
 
-          var legenda = document.createElement('span');
-          legenda.className = 'insta-legenda';
-          legenda.textContent = post.legenda || '';
+          a.appendChild(rodapeDoPost(utilizador, post.legenda));
 
-          a.appendChild(img);
-          if (post.legenda) a.appendChild(legenda);
           li.appendChild(a);
           trilho.appendChild(li);
         });
@@ -172,6 +178,50 @@
       })
       .catch(function () { /* sem ficheiro, o rodapé fica sem o carrossel */ });
   })();
+
+  function cabecalhoDoPost(utilizador) {
+    var topo = document.createElement('span');
+    topo.className = 'insta-topo';
+
+    var selo = document.createElement('span');
+    selo.className = 'insta-selo';
+    selo.textContent = 'R';
+
+    var nome = document.createElement('span');
+    nome.className = 'insta-nome';
+    nome.textContent = utilizador;
+
+    topo.appendChild(selo);
+    topo.appendChild(nome);
+    return topo;
+  }
+
+  function rodapeDoPost(utilizador, legenda) {
+    var base = document.createElement('span');
+    base.className = 'insta-base';
+
+    var icones = document.createElement('span');
+    icones.className = 'insta-icones';
+    icones.setAttribute('aria-hidden', 'true');
+    icones.innerHTML =
+      '<svg viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-9.4A4.1 4.1 0 0 1 12 8a4.1 4.1 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z"/></svg>' +
+      '<svg viewBox="0 0 24 24"><path d="M21 11.6c0 4-4 7.2-9 7.2a10.6 10.6 0 0 1-2.6-.3L4 20.5l1.5-3.4A6.8 6.8 0 0 1 3 11.6c0-4 4-7.2 9-7.2s9 3.2 9 7.2z"/></svg>' +
+      '<svg viewBox="0 0 24 24"><path d="M21.5 3.2 2.8 10.4l6.6 2.3 2.3 6.6 9.8-16.1z"/><path d="m9.4 12.7 4.4-4.4"/></svg>';
+
+    base.appendChild(icones);
+
+    if (legenda) {
+      var texto = document.createElement('span');
+      texto.className = 'insta-legenda';
+      var quem = document.createElement('b');
+      quem.textContent = utilizador;
+      texto.appendChild(quem);
+      texto.appendChild(document.createTextNode(' ' + legenda));
+      base.appendChild(texto);
+    }
+
+    return base;
+  }
 
   function montarCarrossel(secao, trilho) {
     var palco = secao.querySelector('.insta-palco');
