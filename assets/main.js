@@ -6,6 +6,18 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
+  /* ——— voltar ao início ———
+     O #top vive no cabeçalho, que é sticky: o salto por âncora rola até
+     onde o cabeçalho está agora, não até o começo da página. */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="#top"]'), function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var suaveOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({ top: 0, behavior: suaveOk ? 'smooth' : 'auto' });
+      if (history.replaceState) history.replaceState(null, '', location.pathname + location.search);
+    });
+  });
+
   /* ——— menu mobile ——— */
   var burger = document.getElementById('burger');
   var nav = document.getElementById('nav');
