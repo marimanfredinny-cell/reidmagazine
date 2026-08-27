@@ -103,6 +103,8 @@ p{ margin:0 0 1.15em; }
   box-shadow:0 0 0 1px rgba(35,34,31,.10);
 }
 
+.hero-text .logo-hero{ display:none; }
+
 /* ————————————————— logotipo ————————————————— */
 
 .logo{
@@ -270,8 +272,20 @@ p{ margin:0 0 1.15em; }
     margin-left:0;
     text-shadow:none;
   }
-  .hero-text h1{ color:#FFFFFF; margin-bottom:1.9em; }
-  .hero-text .lead{ margin-bottom:5.4rem; }
+  .hero-text h1{ color:#FFFFFF; margin-bottom:.3em; }
+  .hero-text .lead{ margin-bottom:3rem; }
+
+  /* a marca repetida sobre a foto, entre o texto e o botão */
+  .hero-text .logo-hero{
+    display:inline-flex;
+    align-self:center;
+    margin:0 0 clamp(34px,9vw,56px);
+  }
+  .logo-hero .logo-word{ font-size:2rem; color:#FBF8F2; }
+  /* sobre a água clara o dourado não tem contraste: a marca vai na
+     versão clara, que é como ela se comporta sobre foto */
+  .logo-hero .logo-sub{ font-size:.66rem; color:#F2EDE3; }
+  .logo-hero .logo-sub i{ background:#E4DCCB; width:1.6em; }
 
   /* o botão assenta na quebra entre o hero e a seção seguinte, metade
      sobre a foto e metade sobre o papel */
@@ -287,7 +301,7 @@ p{ margin:0 0 1.15em; }
   }
   .hero-text .btn:hover{ background:var(--ponte-fund); border-color:var(--ponte-fund); color:var(--paper-2); }
   .hero-text .lead{ color:var(--ponte-fund); max-width:38ch; }
-  .hero-text .eyebrow{ color:#FFFFFF; }
+  .hero-text .eyebrow{ color:var(--gold); }
   /* fora do hero no telemóvel: as editorias já estão no menu e no rodapé,
      e sem elas o botão encosta na quebra da seção, que é onde deve estar */
   .hero-tags{ display:none; }
