@@ -35,8 +35,8 @@ body{
   color:var(--ink);
   font-family:var(--sans);
   font-weight:300;
-  font-size:clamp(15.5px, 1.05vw, 17px);
-  line-height:1.75;
+  font-size:clamp(17px, 1.15vw, 18.5px);
+  line-height:1.72;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -86,7 +86,7 @@ p{ margin:0 0 1.15em; }
 }
 
 .lead{
-  font-size:clamp(1.02rem, 1.5vw, 1.18rem);
+  font-size:clamp(1.1rem, 1.55vw, 1.28rem);
   color:var(--ink-soft);
   max-width:56ch;
 }
@@ -148,6 +148,7 @@ p{ margin:0 0 1.15em; }
 .nav{ display:flex; align-items:center; gap:clamp(14px, 2vw, 30px); }
 .nav a{
   text-decoration:none;
+  font-weight:600;
   font-size:.74rem;
   letter-spacing:.18em;
   text-transform:uppercase;
@@ -354,7 +355,7 @@ p{ margin:0 0 1.15em; }
   align-items:start;
 }
 .col-body p{ color:var(--ink-soft); max-width:60ch; }
-.col-body .drop{ font-size:1.12rem; color:var(--ink); }
+.col-body .drop{ font-size:1.2rem; color:var(--ink); }
 
 @media (max-width: 860px){ .two-col{ grid-template-columns:1fr; } }
 
@@ -404,7 +405,7 @@ p{ margin:0 0 1.15em; }
   margin:0;
 }
 
-.card p{ color:var(--ink-soft); font-size:.95rem; margin:1.35em 0 0; }
+.card p{ color:var(--ink-soft); font-size:1.02rem; margin:1.35em 0 0; }
 
 @media (max-width: 1040px){
   .editorias{ grid-template-columns:repeat(3, minmax(0,1fr)); gap:clamp(18px,3vw,30px) clamp(16px,2.6vw,26px); }
@@ -419,7 +420,7 @@ p{ margin:0 0 1.15em; }
   }
   .polaroid{ padding:9px 9px 0; }
   .polaroid h3{ font-size:1.18rem; }
-  .card p{ font-size:.86rem; margin-top:1.1em; }
+  .card p{ font-size:.94rem; margin-top:1.1em; }
 }
 
 /* ————————————————— galeria ————————————————— */
@@ -583,7 +584,7 @@ p{ margin:0 0 1.15em; }
 .field input,
 .field select,
 .field textarea{
-  font-family:var(--sans); font-size:1rem; font-weight:300; color:var(--ink);
+  font-family:var(--sans); font-size:1.05rem; font-weight:300; color:var(--ink);
   background:transparent;
   border:0; border-bottom:1px solid var(--line);
   padding:10px 2px 12px;
@@ -603,7 +604,7 @@ p{ margin:0 0 1.15em; }
   display:flex; flex-wrap:wrap; align-items:center; gap:18px 26px;
   margin-top:.6em;
 }
-.form-note{ margin:0; font-size:.8rem; color:var(--ink-mute); }
+.form-note{ margin:0; font-size:.88rem; color:var(--ink-mute); }
 
 .form-error{
   grid-column:1 / -1; margin:0;
@@ -748,7 +749,8 @@ p{ margin:0 0 1.15em; }
 
 .insta-arte{ display:block; background:var(--paper-3); }
 .insta-arte img{
-  width:100%; aspect-ratio:3/4; object-fit:cover;
+  /* as capas são quadradas: o 3/4 antigo era para os prints em 4:5 */
+  width:100%; aspect-ratio:1/1; object-fit:cover;
   transition:transform .8s cubic-bezier(.2,.7,.3,1);
 }
 .insta-post:hover .insta-arte img,
@@ -768,7 +770,7 @@ p{ margin:0 0 1.15em; }
 
 .insta-legenda{
   display:block;
-  font-size:.79rem; line-height:1.5;
+  font-size:.86rem; line-height:1.5;
   color:var(--ink-soft);
   display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
   overflow:hidden;
