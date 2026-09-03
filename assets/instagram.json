@@ -1,42 +1,26 @@
 {
   "_leia_me": [
-    "As capas que aparecem no carrossel do rodapé.",
+    "As publicações que aparecem no carrossel do rodapé.",
     "Cada item precisa de: imagem (caminho no repositório), link (URL do post) e legenda.",
-    "A ordem aqui é a ordem que aparece no site: a edição mais recente primeiro.",
-    "Onde o link é o do perfil, é porque o endereço daquela publicação ainda não foi passado."
+    "A ordem aqui é a ordem que aparece no site: a mais recente primeiro."
   ],
   "perfil": "https://www.instagram.com/reid.magazine/",
   "utilizador": "reid.magazine",
   "publicacoes": [
     {
-      "imagem": "assets/img/capa-017-sergio-carvalho.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "Edição #017 · Sérgio Carvalho, o olhar que eterniza a alma do Porto."
+      "imagem": "assets/img/post1.png",
+      "link": "https://www.instagram.com/p/DcT_naLjfpn/",
+      "legenda": "Olhares que contam histórias. Marco Filipe, fotógrafo, na edição #019."
     },
     {
-      "imagem": "assets/img/capa-014-grupo-versao.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "Edição #014 · Grupo Versão!, ritmo que conecta gerações."
+      "imagem": "assets/img/post2.png",
+      "link": "https://www.instagram.com/p/DcIanu9tJrH/",
+      "legenda": "Sabrina Dias deixou um recado especial para os leitores da REID."
     },
     {
-      "imagem": "assets/img/capa-010-elaine-aragao.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "Edição #010 · Elaine Aragão, beleza que cuida no Barreiro."
-    },
-    {
-      "imagem": "assets/img/capa-008-inara-mayca.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "Edição #008 · Inara Maycá, fotografia com alma e verdade."
-    },
-    {
-      "imagem": "assets/img/capa-007-aline-spadini.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "Edição #007 · Aline Spadini, o caminho para o equilíbrio emocional."
-    },
-    {
-      "imagem": "assets/img/capa-forestglamp.jpg",
-      "link": "https://www.instagram.com/reid.magazine/",
-      "legenda": "@_forestglamp_ · um refúgio onde a natureza e o conforto se encontram."
+      "imagem": "assets/img/post3.png",
+      "link": "https://www.instagram.com/p/DcHDmDBNzyG/",
+      "legenda": "DJ Session ao ar livre, com o Tejo de cenário."
     }
   ]
 }

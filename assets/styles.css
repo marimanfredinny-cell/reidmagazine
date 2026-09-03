@@ -749,8 +749,7 @@ p{ margin:0 0 1.15em; }
 
 .insta-arte{ display:block; background:var(--paper-3); }
 .insta-arte img{
-  /* as capas são quadradas: o 3/4 antigo era para os prints em 4:5 */
-  width:100%; aspect-ratio:1/1; object-fit:cover;
+  width:100%; aspect-ratio:3/4; object-fit:cover;
   transition:transform .8s cubic-bezier(.2,.7,.3,1);
 }
 .insta-post:hover .insta-arte img,
